@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Evaluations";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Evaluaciones</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Todas las evaluaciones
+                       
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table" id="evals-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Rol</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- /.table-responsive -->
+
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+@section scripts{
+    
+    <script>
+
+        var siteUrlPrefix = '@Url.Content("~/")';
+        siteUrlPrefix = siteUrlPrefix.substring(1, siteUrlPrefix.length);
+
+        var controllerName = "api/Evaluation";
+
+        var rowTemplate = '<tr >' +
+                                '<td>_id</td>' +
+                                '<td>_name</td>' +
+                                '<td>_description</td>' +
+                                '<td class="center"></td>' +
+                                '</tr>';
+
+        function getHtmlEvalElement(obj) {
+
+            return rowTemplate.replace("_id", obj.ID)
+                .replace("_name", obj.Name)
+                .replace("_description", obj.Description);
+        }
+
+        function getAllEvaluations() {
+
+            ajaxGet(controllerName, {}, function (success, data) {
+
+                if (success) {
+
+                    if (data && data.length > 0) {
+
+                        for (var i = 0; i < data.length; i++) {
+
+                            var obj = data[i];
+                            var htmlElement = getHtmlEvalElement(obj);
+
+                            $("#evals-table tbody").append(htmlElement);
+                        }
+                    } else {
+                        console.log("no elements in table");
+                    }
+
+                } else {
+
+                    console.log("error");
+                    console.log(data);
+                }
+
+            });
+        }
+
+        $(document).ready(function () {
+
+            getAllEvaluations();
+
+        });
+
+    </script>
+       
+}

@@ -45,3 +45,14 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#Visual Studio
+EFSampleEvaluation.v11.suo
+EFSampleEvaluation.Common/bin
+EFSampleEvaluation.Common/obj
+EFSampleEvaluation.Data/bin
+EFSampleEvaluation.Data/obj
+EFSampleEvaluation.Model/bin
+EFSampleEvaluation.Model/obj
+EFSampleEvaluation.Web/bin
+EFSampleEvaluation.Web/obj
